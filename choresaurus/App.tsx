@@ -26,11 +26,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Welcome from './src/screens/Welcome';
-import Login from './src/screens/Login';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'
-import Providers from './src/navigation';
-
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -67,9 +62,11 @@ function App(): JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  
+
   return (
-    <Providers />
+    <SafeAreaView style={backgroundStyle}>
+      <Welcome />
+    </SafeAreaView>
   );
 }
 
