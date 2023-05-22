@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+
     container: {
         padding: 50,
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#E8DED1',
     }, 
 
     image: {
