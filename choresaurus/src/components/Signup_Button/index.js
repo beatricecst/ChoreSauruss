@@ -2,9 +2,9 @@ import React from "react";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
-const Signup_Button = ({title}) => {
+const Signup_Button = ({title, onPress}) => {
     return (
-        <TouchableOpacity activeOpacity={0.4} style={styles.butt}>
+        <TouchableOpacity activeOpacity={0.4} onPress={onPress} style={styles.butt}>
             <Text style={styles.buttText}>{title}</Text>
         </TouchableOpacity>
     )

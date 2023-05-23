@@ -5,23 +5,23 @@ import { styles } from './styles';
 import Input from "../../components/Input"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-const Signup = ({navigation}) => {
-    const onLogin = () => {
-        navigation.navigate('Login');
+const Login = ({navigation}) => {
+
+    const onSignup = () => {
+        navigation.navigate('Signup');
     }
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <Input placeholder='johndoe@gmail.com' label=' NUS Email' />
                 <Input placeholder='password1234' label='Password' />
-                <Signup_Button title='Sign Up' />
+                <Signup_Button title='Log in' />
                 <Pressable hitSlop={20}>
-                    <Text onPress={onLogin} style={{fontSize: 16, color: '#63A87F'}}>Already have an account? Log In</Text>
+                    <Text onPress={onSignup} style={{fontSize: 16, color: '#63A87F'}}>Don't have an account? Sign up</Text>
                 </Pressable>
             </View>
         </SafeAreaView>
-        
     )
 }
 
-export default Signup;
+export default Login;

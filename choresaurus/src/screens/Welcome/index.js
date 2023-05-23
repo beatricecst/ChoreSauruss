@@ -3,13 +3,21 @@ import { Image, Text, View, Pressable } from "react-native";
 import { styles } from "./styles";
 import Signup_Button from "../../components/Signup_Button";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
+    console.log('navigation', navigation);
+    const onSignup = () => {
+        navigation.navigate("Signup");
+    }
+
+    const onLogin = () => {
+        navigation.navigate('Login');
+    }
     return (
         <View style={styles.container}>
             <Image resizeMode='contain' style={styles.image} source={require('../../assets/dinosaur.png')}/>
             <Text style={styles.text}>Welcome to ChoreSaurus</Text>
-            <Signup_Button title='Create Account' />
-            <Pressable hitSlop={20}>
+            <Signup_Button onPress={onSignup} title='Create Account' />
+            <Pressable onPress={onLogin} hitSlop={20}>
                 <Text style={{fontSize: 20, color: '#63A87F'}}>Log In</Text>
             </Pressable>
 
