@@ -26,6 +26,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Welcome from './src/screens/Welcome';
+import Signup from './src/screens/Signup';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -65,7 +66,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <Welcome />
+      <Signup />
     </SafeAreaView>
   );
 }
