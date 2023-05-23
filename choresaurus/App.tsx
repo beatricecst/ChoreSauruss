@@ -7,8 +7,12 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -27,6 +31,7 @@ import {
 
 import Welcome from './src/screens/Welcome';
 import Signup from './src/screens/Signup';
+import Login from './src/screens/Login';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -56,6 +61,8 @@ function Section({children, title}: SectionProps): JSX.Element {
     </View>
   );
 }
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -64,10 +71,28 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const theme = {
+    dark: false,
+    colors: {
+      primary: 'rgb(255, 45, 85)',
+      background: 'rgb(255, 255, 255)',
+      card: 'rgb(255, 255, 255)',
+      text: 'rgb(28, 28, 30)',
+      border: 'rgb(199, 199, 204)',
+      notification: 'rgb(255, 69, 58)',
+    },
+  }
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Signup />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <NavigationContainer theme={theme} >
+        <Stack.Navigator>
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
