@@ -11,8 +11,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 import {
+  Image,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -21,17 +24,16 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import Welcome from './src/screens/Welcome';
 import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
+import Home from './src/screens/Home';
+import Profile from './src/screens/Profile';
+import Chats from './src/screens/Chats';
+
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -64,6 +66,33 @@ function Section({children, title}: SectionProps): JSX.Element {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const Tabs = () => (
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let icon;
+
+        if (route.name === 'Home') {
+          icon = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+        } else if (route.name === 'Settings') {
+          icon = focused ? 'ios-list' : 'ios-list-outline';
+        }
+
+        // You can return any component that you like here!
+        return <Image source={icon} />
+      },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: 'gray',
+    })}
+  >
+    <Tab.Screen name="Home" component={Home} />
+    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen name="Chats" component={Chats} />
+  </Tab.Navigator>
+)
+
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -83,6 +112,8 @@ function App(): JSX.Element {
     },
   }
 
+  
+
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={theme} >
@@ -90,6 +121,7 @@ function App(): JSX.Element {
           <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
+          {/* <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/> */}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

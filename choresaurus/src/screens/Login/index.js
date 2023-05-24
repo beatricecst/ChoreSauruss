@@ -13,7 +13,7 @@ const Login = ({navigation}) => {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <Input placeholder='johndoe@gmail.com' label=' NUS Email' />
+                <Input placeholder='exxxxxxx@u.nus.edu' label=' NUS Email' />
                 <Input placeholder='password1234' label='Password' />
                 <Signup_Button title='Log in' />
                 <Pressable hitSlop={20}>
