@@ -74,16 +74,22 @@ const Tabs = () => (
 
         if (route.name === 'Home') {
           icon = focused
-            ? 'ios-information-circle'
-            : 'ios-information-circle-outline';
-        } else if (route.name === 'Settings') {
-          icon = focused ? 'ios-list' : 'ios-list-outline';
+            ? require('./src/assets/home.png')
+            : require('./src/assets/home.png');
+        } else if (route.name === 'Profile') {
+          icon = focused
+            ? require('./src/assets/frog.png')
+            : require('./src/assets/frog.png');
+        } else if (route.name === 'Chats') {
+          icon = focused
+            ? require('./src/assets/chats.png')
+            : require('./src/assets/chats.png');
         }
 
         // You can return any component that you like here!
         return <Image source={icon} />
       },
-      tabBarActiveTintColor: 'tomato',
+      tabBarActiveTintColor: 'green',
       tabBarInactiveTintColor: 'gray',
     })}
   >
@@ -118,10 +124,10 @@ function App(): JSX.Element {
     <SafeAreaProvider>
       <NavigationContainer theme={theme} >
         <Stack.Navigator>
-          <Stack.Screen name="Welcome" component={Welcome} />
+          {/* <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Signup" component={Signup} />
-          {/* <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/> */}
+          <Stack.Screen name="Signup" component={Signup} /> */}
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
