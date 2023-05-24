@@ -11,11 +11,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
 
 import {
-  Image,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -24,16 +21,17 @@ import {
   View,
 } from 'react-native';
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
 import Welcome from './src/screens/Welcome';
 import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
-import Home from './src/screens/Home';
-import Profile from './src/screens/Profile';
-import Chats from './src/screens/Chats';
-
-
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -66,6 +64,7 @@ function Section({children, title}: SectionProps): JSX.Element {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+<<<<<<< HEAD
 const Tabs = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
@@ -99,6 +98,8 @@ const Tabs = () => (
   </Tab.Navigator>
 )
 
+=======
+>>>>>>> parent of 636b3e1 (selwin stupid)
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -118,16 +119,18 @@ function App(): JSX.Element {
     },
   }
 
-  
-
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={theme} >
         <Stack.Navigator>
           {/* <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Login" component={Login} />
+<<<<<<< HEAD
           <Stack.Screen name="Signup" component={Signup} /> */}
           <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
+=======
+          <Stack.Screen name="Signup" component={Signup} />
+>>>>>>> parent of 636b3e1 (selwin stupid)
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
