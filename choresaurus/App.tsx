@@ -64,42 +64,6 @@ function Section({children, title}: SectionProps): JSX.Element {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-<<<<<<< HEAD
-const Tabs = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let icon;
-
-        if (route.name === 'Home') {
-          icon = focused
-            ? require('./src/assets/home.png')
-            : require('./src/assets/home.png');
-        } else if (route.name === 'Profile') {
-          icon = focused
-            ? require('./src/assets/frog.png')
-            : require('./src/assets/frog.png');
-        } else if (route.name === 'Chats') {
-          icon = focused
-            ? require('./src/assets/chats.png')
-            : require('./src/assets/chats.png');
-        }
-
-        // You can return any component that you like here!
-        return <Image source={icon} />
-      },
-      tabBarActiveTintColor: 'green',
-      tabBarInactiveTintColor: 'gray',
-    })}
-  >
-    <Tab.Screen name="Home" component={Home} />
-    <Tab.Screen name="Profile" component={Profile} />
-    <Tab.Screen name="Chats" component={Chats} />
-  </Tab.Navigator>
-)
-
-=======
->>>>>>> parent of 636b3e1 (selwin stupid)
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -123,14 +87,9 @@ function App(): JSX.Element {
     <SafeAreaProvider>
       <NavigationContainer theme={theme} >
         <Stack.Navigator>
-          {/* <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Login" component={Login} />
-<<<<<<< HEAD
-          <Stack.Screen name="Signup" component={Signup} /> */}
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
-=======
           <Stack.Screen name="Signup" component={Signup} />
->>>>>>> parent of 636b3e1 (selwin stupid)
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
