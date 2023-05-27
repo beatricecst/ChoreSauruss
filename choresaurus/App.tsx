@@ -38,6 +38,8 @@ import { AddJob } from './src/screens/AddJob';
 import AuthContextProvider, { AuthContext } from './src/store/auth-context';
 import AuthContent from './src/components/AuthContent';
 import AuthForm from './src/components/AuthForm';
+import BlueButton from './src/components/BlueButton';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -62,6 +64,7 @@ function AuthStack() {
 }
 
 function AuthenticatedStack() {
+  const authcontext = useContext(AuthContext);
   return (
     <Stack.Navigator
       // screenOptions={{
@@ -70,7 +73,9 @@ function AuthenticatedStack() {
       //   contentStyle: { backgroundColor: Colors.primary100 },
       // }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Home" component={Home} options={{
+        headerRight: () => (<BlueButton title='Log out' onPress={authcontext.logout} />)
+      }}/>
     </Stack.Navigator>
   );
 }

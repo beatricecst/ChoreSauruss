@@ -4,9 +4,9 @@ import { styles } from "./styles";
 
 const BlueButton = ({title, onPress}) => {
     return (
-        <TouchableOpacity activeOpacity={0.4} onPress={onPress} style={styles.butt}>
+        <Pressable activeOpacity={0.4} onPress={onPress} style={styles.butt}>
             <Text style={styles.buttText}>{title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
-export default React.memo(BlueButton);
+export default BlueButton;
