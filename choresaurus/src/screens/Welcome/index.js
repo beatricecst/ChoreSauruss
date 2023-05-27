@@ -2,14 +2,15 @@ import React from "react";
 import { Image, Text, View, Pressable } from "react-native";
 import { styles } from "./styles";
 import Signup_Button from "../../components/Signup_Button";
+import { useNavigation } from "@react-navigation/native";
 
-const Welcome = ({ navigation }) => {
-    console.log('navigation', navigation);
-    const onSignup = () => {
-        navigation.navigate("Signup");
+const Welcome = () => {
+    const navigation = useNavigation();
+    function onSignup() {
+        navigation.navigate('Signup');
     }
 
-    const onLogin = () => {
+    function onLogin() {
         navigation.navigate('Login');
     }
     return (

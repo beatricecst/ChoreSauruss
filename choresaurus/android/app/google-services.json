@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "86277832249",
+    "project_id": "choresaurus-f4822",
+    "storage_bucket": "choresaurus-f4822.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86277832249:android:549d3c912d5130c85217e8",
+        "android_client_info": {
+          "package_name": "com.choresaurus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86277832249-k7l5585t9cgghm7ftiobobja107kcsd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiyFK2j-m-Gu_Pt1RwyDtuv7Bh6tFDEvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86277832249-k7l5585t9cgghm7ftiobobja107kcsd2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "86277832249-f7t8ai99v1tamo7b19hk3f6b6ud72g0b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.choresaurus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

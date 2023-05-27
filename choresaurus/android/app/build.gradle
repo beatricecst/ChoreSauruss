@@ -36,7 +36,7 @@ react {
     //
     //   The name of the generated asset file containing your JS bundle
     // bundleAssetName = "MyApplication.android.bundle"
-    //
+    //![](../../../../../../var/folders/_z/lnxp3df15254pffsvf0wlvf80000gn/T/TemporaryItems/NSIRD_screencaptureui_HhRYs7/Screenshot 2023-05-25 at 10.57.31 PM.png)
     //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
     // entryFile = file("../js/MyApplication.android.js")
     //

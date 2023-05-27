@@ -5,12 +5,13 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import {
   ScrollView,
@@ -30,130 +31,85 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Welcome from './src/screens/Welcome';
-import Signup from './src/screens/Signup';
+import {Signup} from './src/screens/Signup';
 import Login from './src/screens/Login';
+import { Home } from './src/screens/Home';
+import { AddJob } from './src/screens/AddJob';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
-<<<<<<< HEAD
-const Tabs = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let icon;
-
-        if (route.name === 'Home') {
-          icon = focused
-            ? require('./src/assets/home.png')
-            : require('./src/assets/home.png');
-        } else if (route.name === 'Profile') {
-          icon = focused
-            ? require('./src/assets/frog.png')
-            : require('./src/assets/frog.png');
-        } else if (route.name === 'Chats') {
-          icon = focused
-            ? require('./src/assets/chats.png')
-            : require('./src/assets/chats.png');
-        }
-
-        // You can return any component that you like here!
-        return <Image source={icon} />
-      },
-      tabBarActiveTintColor: 'green',
-      tabBarInactiveTintColor: 'gray',
-    })}
-  >
-    <Tab.Screen name="Home" component={Home} />
-    <Tab.Screen name="Profile" component={Profile} />
-    <Tab.Screen name="Chats" component={Chats} />
-  </Tab.Navigator>
-)
-
-=======
->>>>>>> parent of 636b3e1 (selwin stupid)
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const theme = {
-    dark: false,
-    colors: {
-      primary: 'rgb(255, 45, 85)',
-      background: 'rgb(255, 255, 255)',
-      card: 'rgb(255, 255, 255)',
-      text: 'rgb(28, 28, 30)',
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
-    },
-  }
-
+function AuthStack() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer theme={theme} >
-        <Stack.Navigator>
-          {/* <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="Login" component={Login} />
-<<<<<<< HEAD
-          <Stack.Screen name="Signup" component={Signup} /> */}
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
-=======
-          <Stack.Screen name="Signup" component={Signup} />
->>>>>>> parent of 636b3e1 (selwin stupid)
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Stack.Navigator
+      // screenOptions={{
+      //   headerStyle: { backgroundColor: Colors.primary500 },
+      //   headerTintColor: 'white',
+      //   contentStyle: { backgroundColor: Colors.primary100 },
+      // }}
+    >
+      <Stack.Screen name='Welcome' component={Welcome} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Signup" component={Signup} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function AuthenticatedStack() {
+  return (
+    <Stack.Navigator
+      // screenOptions={{
+      //   headerStyle: { backgroundColor: Colors.primary500 },
+      //   headerTintColor: 'white',
+      //   contentStyle: { backgroundColor: Colors.primary100 },
+      // }}
+    >
+      <Stack.Screen name="Welcome" component={Welcome} />
+    </Stack.Navigator>
+  );
+}
 
+function Navigation() {
+  return (
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
+  );
+}
+
+function App(): JSX.Element {
+
+  // useEffect(() => {
+  //   GoogleSignin.configure({
+  //     scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+  //     webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
+  //     offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+  //     hostedDomain: '', // specifies a hosted domain restriction
+  //     forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+  //     accountName: '', // [Android] specifies an account name on the device that should be used
+  //     iosClientId: '86277832249-f7t8ai99v1tamo7b19hk3f6b6ud72g0b.apps.googleusercontent.com', // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+  //     googleServicePlistPath: '', // [iOS] if you renamed your GoogleService-Info file, new name here, e.g. GoogleService-Info-Staging
+  //     openIdRealm: '', // [iOS] The OpenID2 realm of the home web server. This allows Google to include the user's OpenID Identifier in the OpenID Connect ID token.
+  //     profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
+  //   });
+  // })
+
+  return (
+      <>
+  
+        <Navigation />
+      </>
+    );
+
+
+
+  
+}
 export default App;
+
+
+
+
