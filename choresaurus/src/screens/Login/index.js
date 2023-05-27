@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Alert, Image, Pressable, Text, View } from "react-native";
 import Signup_Button from '../../components/Signup_Button'
@@ -6,6 +6,7 @@ import { styles } from './styles';
 import Input from "../../components/Input"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AuthContent from "../../components/AuthContent";
+import { AuthContext } from "../../store/auth-context";
 
 function Login() {
 
@@ -26,11 +27,13 @@ function Login() {
     // )
 
     const[isAuthenticating, setIsAuthenticationg] = useState(false);
+    const authcontext = useContext(AuthContext);
 
     async function loginHandler({email, password}) {
         try {
             setIsAuthenticationg(true);
-            await login(email, password); 
+            const token = await login(email, password); 
+            authcontext.authenticate(token);
             setIsAuthenticationg(false);
         } catch (error) {
             Alert.alert('Authentication failed!', 'Incorrect email or password')

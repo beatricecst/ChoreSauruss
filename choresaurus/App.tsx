@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -35,6 +35,9 @@ import {Signup} from './src/screens/Signup';
 import Login from './src/screens/Login';
 import { Home } from './src/screens/Home';
 import { AddJob } from './src/screens/AddJob';
+import AuthContextProvider, { AuthContext } from './src/store/auth-context';
+import AuthContent from './src/components/AuthContent';
+import AuthForm from './src/components/AuthForm';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -67,16 +70,19 @@ function AuthenticatedStack() {
       //   contentStyle: { backgroundColor: Colors.primary100 },
       // }}
     >
-      <Stack.Screen name="Welcome" component={Welcome} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 }
 
 function Navigation() {
+  const authcontext = useContext(AuthContext);
   return (
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
+      <NavigationContainer>
+        {authcontext.isAuthenticated && <AuthenticatedStack />}
+        {!authcontext.isAuthenticated && <AuthStack />}
+        
+      </NavigationContainer>
   );
 }
 
@@ -99,8 +105,9 @@ function App(): JSX.Element {
 
   return (
       <>
-  
+      <AuthContextProvider>  
         <Navigation />
+        </AuthContextProvider>
       </>
     );
 
