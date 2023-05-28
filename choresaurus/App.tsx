@@ -20,6 +20,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -34,6 +35,8 @@ import Welcome from './src/screens/Welcome';
 import {Signup} from './src/screens/Signup';
 import Login from './src/screens/Login';
 import { Home } from './src/screens/Home';
+import { Profile } from './src/screens/Profile';
+import { Chats } from './src/screens/Chats';
 import { AddJob } from './src/screens/AddJob';
 import AuthContextProvider, { AuthContext } from './src/store/auth-context';
 import AuthContent from './src/components/AuthContent';
@@ -46,6 +49,7 @@ type SectionProps = PropsWithChildren<{
 
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function AuthStack() {
   return (
@@ -63,21 +67,59 @@ function AuthStack() {
   );
 }
 
+// function AuthenticatedStack() {
+//   const authcontext = useContext(AuthContext);
+//   return (
+//     <Stack.Navigator
+//       // screenOptions={{
+//       //   headerStyle: { backgroundColor: Colors.primary500 },
+//       //   headerTintColor: 'white',
+//       //   contentStyle: { backgroundColor: Colors.primary100 },
+//       // }}
+//     >
+//       <Stack.Screen name="Home" component={Home} options={{
+//         headerRight: () => (<BlueButton title='Log out' onPress={authcontext.logout} />)
+//       }}/>
+//     </Stack.Navigator>
+//   );
+// }
+
 function AuthenticatedStack() {
   const authcontext = useContext(AuthContext);
   return (
-    <Stack.Navigator
-      // screenOptions={{
-      //   headerStyle: { backgroundColor: Colors.primary500 },
-      //   headerTintColor: 'white',
-      //   contentStyle: { backgroundColor: Colors.primary100 },
-      // }}
+    <Tab.Navigator 
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let icon;
+
+          if (route.name === 'Home') {
+            icon = focused
+              ? require('./src/assets/home.png')
+              : require('./src/assets/home.png');
+          } else if (route.name === 'Profile') {
+            icon = focused
+              ? require('./src/assets/frog.png')
+              : require('./src/assets/frog.png');
+          } else if (route.name === 'Chats') {
+            icon = focused
+              ? require('./src/assets/chats.png')
+              : require('./src/assets/chats.png');
+          }
+
+          // You can return any component that you like here!
+          return <Image style={{ width: 24, height: 24 }} source={icon} />
+        },
+        headerShown: true,
+        tabBarShowLabel: true,
+        headerRight: () => <BlueButton title='Log out' onPress={authcontext.logout} />
+      })} 
+      
     >
-      <Stack.Screen name="Home" component={Home} options={{
-        headerRight: () => (<BlueButton title='Log out' onPress={authcontext.logout} />)
-      }}/>
-    </Stack.Navigator>
-  );
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Chats" component={Chats} />
+    </Tab.Navigator>
+  )
 }
 
 function Navigation() {

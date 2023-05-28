@@ -7,6 +7,7 @@ import Input from "../../components/Input"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AuthContent from "../../components/AuthContent";
 import { AuthContext } from "../../store/auth-context";
+import { login } from "../../util/auth";
 
 function Login() {
 
@@ -36,6 +37,7 @@ function Login() {
             authcontext.authenticate(token);
             setIsAuthenticationg(false);
         } catch (error) {
+            console.error(error);
             Alert.alert('Authentication failed!', 'Incorrect email or password')
         }
         

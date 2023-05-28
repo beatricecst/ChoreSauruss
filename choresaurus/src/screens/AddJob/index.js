@@ -20,4 +20,5 @@ export const AddJob = () => {
             </View>
         </SafeAreaView>
     )
+    
 }
