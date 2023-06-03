@@ -5,6 +5,6 @@ export const styles = StyleSheet.create({
         marginTop: 70,
         padding: 50,
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     }
 })

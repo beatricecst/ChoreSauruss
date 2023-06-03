@@ -16,14 +16,14 @@
 
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-function Input({
+const Input = ({
   label,
   keyboardType,
   secure,
   onUpdateValue,
   value,
   placeholder,
-}) {
+}) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.label}>

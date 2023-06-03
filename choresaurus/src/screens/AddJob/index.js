@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useContext, useState } from "react";
+import { Alert, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Input from "../../components/Input";
 import ParaInput from "../../components/ParaInput";
@@ -7,18 +7,61 @@ import Signup_Button from "../../components/Signup_Button";
 import { styles } from "./styles";
 import Headers from "../../components/Headers";
 import BlueButton from "../../components/BlueButton";
+import storage from '@react-native-firebase/storage';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+import AuthContent from "../../components/AuthContent";
+import { AuthContext } from "../../store/auth-context";
+import { ScrollView } from "react-native-gesture-handler";
+
+
+
 
 export const AddJob = () => {
+
+    // const {isAuthenticated, logout} = useContext(AuthContext);
+    const [start, setStart] = useState(null);
+    const [end, setEnd] = useState(null);
+    const [desc, setDesc] = useState(null);
+    
+    const handleStart = (s) => {
+        setStart(s);
+    }
+    const handleEnd = (e) => {
+        setEnd(e);
+    }
+    const handleDesc = (input) => {
+        setDesc(input);
+    }
+    const submitJob = async() => {
+        
+        firestore().collection('Jobs')
+                    .add({
+                        Start: start,
+                        End: end,
+                        Desc: desc,
+                        postTime: firestore.Timestamp.fromDate(new Date())
+                    })
+                    .then(() => {
+                        Alert.alert('Yay! Job request submitted', 'Please wait for errand runners to accept it')
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+    }
     return (
+        <ScrollView>
         <SafeAreaView>
             <View style={styles.container}>
                 <Headers title='New Job Request' />
-                <Input label='Start Location' placeholder='eg. Kent Ridge Mrt' />
-                <Input label='End Location' placeholder='eg. Central Library' />
-                <ParaInput label='Job Description' placeholder='eg. Please help to buy a packet of Panadol from Watsons and pass it to me at Central Library.' />
-                <BlueButton title='Submit' />
+                <ParaInput label='Start Location' placeholder='eg. Kent Ridge Mrt' onChangeText={handleStart}/>
+                <ParaInput label='End Location' placeholder='eg. Central Library' onChangeText={handleEnd}/>
+                <ParaInput label='Job Description' placeholder='eg. Please help to buy a packet of Panadol from Watsons and pass it to me at Central Library.' onChangeText={handleDesc}/>
+                <BlueButton title='Submit' onPress={submitJob}/>
             </View>
         </SafeAreaView>
+        </ScrollView>
     )
     
 }

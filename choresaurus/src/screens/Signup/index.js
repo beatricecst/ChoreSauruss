@@ -34,7 +34,8 @@ export function Signup () {
             authcontext.authenticate(token);
             setIsAuthenticationg(false);
         } catch (error) {
-            Alert.alert('Authentication failed', 'Please check your credentials')
+            console.log(error);
+            Alert.alert('Authentication failed', 'Please check your credentials');
         }
         
     }
