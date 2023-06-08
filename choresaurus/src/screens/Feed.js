@@ -21,36 +21,7 @@ export const Feed = () => {
     function goJobList() {
         navigation.navigate('Browse');
     }
-    const [jobs, setJobs] = useState(null);
-
-    useEffect(() => {
-        const fetchPosts = async() => {
-            try {
-                const list = [];
-                await firestore()
-                .collection('Jobs')
-                .get()
-                .then((querySnapShot) => {
-                    querySnapShot.forEach((doc) => {
-                        const{Start, End, Desc, postTime} = doc.data();
-                        list.push({
-                            userName: 'John Doe',
-                            start: Start,
-                            end: End,
-                            desc: Desc,
-                            postTime: postTime,
-                        })
-                    })
-                        
-                    });
-                setJobs(list);
-                console.log('Jobs', list);
-                } catch (error) {
-                console.log(error);
-                }
-        }
-        fetchPosts();
-    }, []);
+    
 
     return (
         <View>
@@ -63,15 +34,7 @@ export const Feed = () => {
             </View>
             
         
-            <FlatList
-                data={jobs}
-                renderItem={({ item }) => (
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={styles.text}>Start: {item.start} </Text>
-                    <Text>End: {item.end}</Text>
-                    </View>
-                )}
-                />
+            
 
 
         </View>
@@ -80,10 +43,5 @@ export const Feed = () => {
     )
 }
 
-const styles = StyleSheet.create({
-    text: {
-        color: '#000000',
-        marginRight: 30
-    }
-})
+
 
