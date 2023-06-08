@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { StyleSheet, Dimensions } from "react-native";
 import { useState, useEffect } from "react";
 import firestore from '@react-native-firebase/firestore';
+import { TouchableOpacity } from "react-native";
 
 const JobCard = ({item, onPress}) => {
 
@@ -12,6 +13,9 @@ const JobCard = ({item, onPress}) => {
             <Text style={styles.text}>Start: {item.start}</Text>
             <Text style={styles.text}>End: {item.end}</Text>
             <Text style={styles.text}>Job Description: {item.desc}</Text>
+            <TouchableOpacity onPress={onPress} style={styles.butt}>
+                <Text style={styles.buttText}>Accept job</Text>
+            </TouchableOpacity>
         </View>
     )
 };
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'flex-start',
         width: deviceWidth - 50,
-        height: 150,
+        height: 170,
         backgroundColor: '#b2d3c2',
         borderRadius: 20,
         shadowColor: '#000000',
@@ -37,6 +41,18 @@ const styles = StyleSheet.create({
     text: {
         color: '#000',
         padding: 5,
+    },
+    butt: {
+        backgroundColor: '#a7c2cc',
+        width: 100,
+        height: 30,
+        borderRadius: 8,
+        alignSelf: 'flex-end'
+    },
+    buttText: {
+        color: '#000',
+        alignSelf: 'center',
+        marginTop: 4,
     }
 })
 
