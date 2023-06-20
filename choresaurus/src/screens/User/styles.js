@@ -16,25 +16,30 @@ import { AuthContext } from "../../store/auth-context";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-export const AddJob = () => {
+export const User = () => {
 
     // const {isAuthenticated, logout} = useContext(AuthContext);
-    const [start, setStart] = useState(null);
-    const [end, setEnd] = useState(null);
-    const [desc, setDesc] = useState(null);
+    const [firstName, setFN] = useState(null);
+    const [lastName, setLN] = useState(null);
+    const [phone, setPN] = useState(null);
+    const [em, setEM] = useState(null);
     
-    const handleStart = (s) => {
-        setStart(s);
+    const handleFN = (s) => {
+        setFN(s);
     }
-    const handleEnd = (e) => {
-        setEnd(e);
+    const handleLN = (e) => {
+        setLN(e);
     }
-    const handleDesc = (input) => {
-        setDesc(input);
+    const handlePN = (input) => {
+        setPN(input);
     }
-    const submitJob = async() => {
+    const handleEM = (ems) => {
+        setEM(ems);
+    }
+
+    const editme = async() => {
         
-        firestore().collection('Jobs')
+        firestore().collection('User')
                     .add({
                         Start: start,
                         End: end,

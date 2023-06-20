@@ -35,13 +35,13 @@ import Welcome from './src/screens/Welcome';
 import {Signup} from './src/screens/Signup';
 import Login from './src/screens/Login';
 import { Home } from './src/screens/Home';
-import { Profile } from './src/screens/Profile';
 import { Chats } from './src/screens/Chats';
 import { AddJob } from './src/screens/AddJob';
 import AuthContextProvider, { AuthContext } from './src/store/auth-context';
 import AuthContent from './src/components/AuthContent';
 import AuthForm from './src/components/AuthForm';
 import BlueButton from './src/components/BlueButton';
+import { ProfileNavigator } from './src/screens/ProfileNavigator';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -116,7 +116,7 @@ function AuthenticatedStack() {
       
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileNavigator} />
       <Tab.Screen name="Chats" component={Chats} />
     </Tab.Navigator>
   )
