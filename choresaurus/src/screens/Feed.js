@@ -8,7 +8,7 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FlatList } from "react-native";
-
+import { AddJob } from "./AddJob";
 
 export const Feed = () => {
 

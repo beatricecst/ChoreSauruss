@@ -25,8 +25,10 @@ export const Browse = () => {
                 .then((querySnapShot) => {
                     querySnapShot.forEach((doc) => {
                         const{Start, End, Desc, postTime} = doc.data();
+                        const userDoc = firestore.collection('users').doc(userId).get();
+                        const username = userDoc.exists ? userDoc.data().username : '';
                         list.push({
-                            userName: 'John Doe',
+                            userName: username,
                             start: Start,
                             end: End,
                             desc: Desc,

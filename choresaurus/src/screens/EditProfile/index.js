@@ -13,8 +13,50 @@ import { styles } from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import { AuthContext } from '../../components/AuthProvider';
+import { useState, useContext } from 'react';
+import 'firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+import { Alert } from 'react-native';
 
 const EditProfile = () => {
+  const {user, logout} = useContext(AuthContext);
+  const [fname, setFname] = useState(null);
+  const [lname, setLname] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [email, setEmail] = useState(null);
+
+  const handleFname = (f) => {
+    setFname(f);
+  }
+  const handleLname = (l) => {
+      setLname(l);
+  }
+  const handlePhone = (p) => {
+      setPhone(p);
+  }
+  const handleEmail = (e) => {
+    setEmail(e);
+}
+
+const Edit = async() => {
+        
+  firestore().collection('users')
+              .add({
+                  userid: user.uid,
+                  Fname: fname,
+                  Lname: lname,
+                  Phone: phone,
+                  Email: email
+              })
+              .then(() => {
+                  Alert.alert('Profile successfully updated!')
+              })
+              .catch((error) => {
+                  console.log(error)
+              })
+}
+
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
@@ -67,6 +109,7 @@ const EditProfile = () => {
         <View style={styles.action}>
           <FontAwesome name="user-o" size={20} />
           <TextInput
+            onChangeText={handleFname}
             placeholder="First Name"
             placeholderTextColor="#666666"
             style={styles.textInput}
@@ -75,6 +118,7 @@ const EditProfile = () => {
         <View style={styles.action}>
           <FontAwesome name="user-o" size={20} />
           <TextInput
+            onChangeText={handleLname}
             placeholder="Last Name"
             placeholderTextColor="#666666"
             style={styles.textInput}
@@ -83,6 +127,7 @@ const EditProfile = () => {
         <View style={styles.action}>
           <Feather name="phone" size={20} />
           <TextInput
+            onChangeText={handlePhone}
             placeholder="Phone"
             keyboardType="number-pad"
             placeholderTextColor="#666666"
@@ -92,13 +137,14 @@ const EditProfile = () => {
         <View style={styles.action}>
           <FontAwesome name="envelope-o" size={20} />
           <TextInput
+            onChangeText={handleEmail}
             placeholder="Email"
             keyboardType="email-address"
             placeholderTextColor="#666666"
             style={styles.textInput}
           />
         </View>
-        <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.commandButton} onPress={Edit}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
       </View>

@@ -1,50 +1,99 @@
-import React, { useContext } from "react";
-import { useState } from "react";
-import { Alert, Image, Pressable, Text, View } from "react-native";
-import Signup_Button from '../../components/Signup_Button'
-import { styles } from './styles';
-import Input from "../../components/Input"
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import AuthContent from "../../components/AuthContent";
-import { AuthContext } from "../../store/auth-context";
-import { login } from "../../util/auth";
+import React, {useContext, useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Platform,
+  StyleSheet,
+  ScrollView
+} from 'react-native';
+import FormInput from '../../components/FormInput';
+import FormButton from '../../components/FormButton';
+import { AuthContext } from '../../components/AuthProvider';
 
-function Login() {
+const Login = ({navigation}) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-    // const onSignup = () => {
-    //     navigation.navigate('Signup');
-    // }
-    // return (
-    //     <SafeAreaView>
-    //         <View style={styles.container}>
-    //             <Input placeholder='johndoe@gmail.com' label=' NUS Email' />
-    //             <Input placeholder='password1234' label='Password' />
-    //             <Signup_Button title='Log in' />
-    //             <Pressable hitSlop={20}>
-    //                 <Text onPress={onSignup} style={{fontSize: 16, color: '#63A87F'}}>Don't have an account? Sign up</Text>
-    //             </Pressable>
-    //         </View>
-    //     </SafeAreaView>
-    // )
+  const {login} = useContext(AuthContext);
 
-    const[isAuthenticating, setIsAuthenticationg] = useState(false);
-    const authcontext = useContext(AuthContext);
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../../assets/dinosaur.png')}
+        style={styles.logo}
+      />
+      <Text style={styles.text}>Choresaurus</Text>
 
-    async function loginHandler({email, password}) {
-        try {
-            setIsAuthenticationg(true);
-            const token = await login(email, password); 
-            authcontext.authenticate(token);
-            setIsAuthenticationg(false);
-        } catch (error) {
-            console.error(error);
-            Alert.alert('Authentication failed!', 'Incorrect email or password')
-        }
-        
-    }
-    return (
-        <AuthContent isLogin onAuthenticate={loginHandler}/>
-    )
-}
+      <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+
+      <FormInput
+        labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholderText="Password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
+
+      <FormButton
+        buttonTitle="Log In"
+        onPress={() => login(email, password)}
+      />
+
+      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+        <Text style={styles.navButtonText}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.forgotButton}
+        onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.navButtonText}>
+          Don't have an acount? Create here
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+};
 
 export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 50
+  },
+  logo: {
+    height: 200,
+    width: 200,
+    resizeMode: 'contain',
+  },
+  text: {
+    fontFamily: 'Kufam-SemiBoldItalic',
+    fontSize: 28,
+    marginBottom: 10,
+    color: '#051d5f',
+  },
+  navButton: {
+    marginTop: 15,
+  },
+  forgotButton: {
+    marginVertical: 35,
+  },
+  navButtonText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#2e64e5',
+    fontFamily: 'Lato-Regular',
+  },
+});

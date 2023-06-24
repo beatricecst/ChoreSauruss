@@ -7,21 +7,19 @@ import Signup_Button from "../../components/Signup_Button";
 import { styles } from "./styles";
 import Headers from "../../components/Headers";
 import BlueButton from "../../components/BlueButton";
-import storage from '@react-native-firebase/storage';
-import firebase from 'firebase/app';
 import 'firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import AuthContent from "../../components/AuthContent";
-import { AuthContext } from "../../store/auth-context";
 import { ScrollView } from "react-native-gesture-handler";
+import { AuthContext } from "../../components/AuthProvider";
 
 
 export const AddJob = () => {
-
+    const {user, logout} = useContext(AuthContext);
     // const {isAuthenticated, logout} = useContext(AuthContext);
     const [start, setStart] = useState(null);
     const [end, setEnd] = useState(null);
     const [desc, setDesc] = useState(null);
+    
     
     const handleStart = (s) => {
         setStart(s);
@@ -36,6 +34,7 @@ export const AddJob = () => {
         
         firestore().collection('Jobs')
                     .add({
+                        userid: user.uid,
                         Start: start,
                         End: end,
                         Desc: desc,
