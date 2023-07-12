@@ -8,6 +8,7 @@ export default function Enter({onLogin, username, setUsername}) {
         style={styles.input}
         onChangeText={setUsername}
         value={username}
+        placeholder='Enter your name'
       />
       <Button title={'Enter Chatroom'} onPress={onLogin} />
     </View>

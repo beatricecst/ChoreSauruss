@@ -30,8 +30,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Providers from './src/components/Providers';
 import {initializeApp} from 'firebase/app';
+import Providers from './src/components/Providers';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCLeSiwzU85nZHxilAaFJ54ikLeDmA4L7c",
@@ -45,7 +45,7 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-import Providers from './src/components/Providers';
+
 
 type SectionProps = PropsWithChildren<{
   title: string;
