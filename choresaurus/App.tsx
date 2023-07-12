@@ -45,6 +45,7 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+import Providers from './src/components/Providers';
 
 type SectionProps = PropsWithChildren<{
   title: string;
