@@ -41,7 +41,7 @@ const FeedStack = () => (
 const ProfileStack = ({navigation}) => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profile"
+      name="ProfileNavigator"
       component={ProfileNavigator}
       options={{
         headerShown: false,
@@ -83,9 +83,10 @@ const AppStack = () => {
   return (
     
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#2e64e5',
-      }}>
+      // tabBarOptions={{
+      //   activeTintColor: '#2e64e5',
+      // }}
+      >
       <Tab.Screen
         name="FeedStack"
         component={FeedStack}

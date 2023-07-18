@@ -18,40 +18,101 @@ export const Browse = () => {
     
     const [jobs, setJobs] = useState(null);
 
+    firebase.firestore().collection('users').where('Email', '==', 'jane@gmail.com').get()
+  .then((querySnapshot) => {
+    if (!querySnapshot.empty) {
+      const fnames = []; // In case there are multiple matching documents, store them in an array
+
+      querySnapshot.forEach((doc) => {
+        const fname = doc.data().Fname;
+        fnames.push(fname); // Store the 'Fname' value in the array
+      });
+
+      // If there's only one document, you can directly access the 'Fname' value
+      const singleFname = fnames[0];
+
+      console.log('Fnames:', fnames);
+      console.log('Single Fname:', singleFname);
+    } else {
+      console.log('No documents matching the condition found.');
+    }
+  })
+  .catch((error) => {
+    console.log('Error getting documents:', error);
+  });
+
+
+    // useEffect(() => {
+    //     const fetchPosts = async() => {
+    //         try {
+    //             const list = [];
+    //             await firestore()
+    //             .collection('Jobs')
+    //             .get()
+    //             .then((querySnapShot) => {
+    //                 querySnapShot.forEach(async(doc) => {
+    //                     const { Start, End, Desc, postTime } = doc.data();
+    //                     const userDoc = await firebase.firestore().collection('users').where('userid', '==', doc.data().userid).get();
+                        
+    //                     // const userDoc = await firestore.collection('users').doc("userid").get();
+    //                     const username = userDoc.exists ? userDoc.data().Fname : '';
+    //                     list.push({
+    //                         userName: username,
+    //                         start: Start,
+    //                         end: End,
+    //                         desc: Desc,
+    //                         postTime: postTime,
+    //                     })
+    //                 })
+                        
+    //                 });
+                
+    //             list.sort((a, b) => new Date(b.postTime) - new Date(a.postTime));
+    //             setJobs(list);
+    //             console.log('list', list);
+                
+    //             } catch (error) {
+    //             console.log(error);
+    //             }
+    //     }
+    //     fetchPosts();
+    // }, []);
 
     useEffect(() => {
-        const fetchPosts = async() => {
-            try {
-                const list = [];
-                await firestore()
-                .collection('Jobs')
-                .get()
-                .then((querySnapShot) => {
-                    querySnapShot.forEach(async(doc) => {
-                        const { Start, End, Desc, postTime } = doc.data();
-                        // const userDoc = await firestore.collection('users').doc("userid").get();
-                        // const username = userDoc.exists ? userDoc.data().username : '';
-                        list.push({
-                            userName: 'john',
-                            start: Start,
-                            end: End,
-                            desc: Desc,
-                            postTime: postTime,
-                        })
-                    })
-                        
-                    });
-                
-                list.sort((a, b) => new Date(b.postTime) - new Date(a.postTime));
-                setJobs(list);
-                console.log('list', list);
-                
-                } catch (error) {
-                console.log(error);
-                }
-        }
+        const fetchPosts = async () => {
+          try {
+            
+            const querySnapShot = await firestore().collection('Jobs').get();
+            const promises = querySnapShot.docs.map(async (doc) => {
+              const { Start, End, Desc, postTime } = doc.data();
+              const userDoc = await firestore()
+                .collection('users')
+                .where('userid', '==', doc.data().userid)
+                .get();
+      
+              const username = userDoc.docs[0].exists ? userDoc.docs[0].data().Fname : '';
+              return {
+                userName: username,
+                start: Start,
+                end: End,
+                desc: Desc,
+                postTime: postTime,
+              };
+            });
+      
+            const list = await Promise.all(promises);
+            console.log('list:', list);
+            setJobs(list); 
+      
+            // Now you can use the 'list' array containing the data as needed
+          } catch (error) {
+            console.log('Error fetching posts:', error);
+          }
+        };
+      
         fetchPosts();
-    }, []);
+      }, []);
+      
 
     // const findUser = async name => {
     //     const database = getDatabase();

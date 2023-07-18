@@ -4,11 +4,56 @@ import { Avatar, Title, Caption, TouchableRipple } from 'react-native-paper';
 import { styles } from './styles';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import EditProfile from "../EditProfile";
+import { firebase } from "@react-native-firebase/firestore";
+import { useState, useEffect } from "react";
+import { IconFill, IconOutline } from "@ant-design/icons-react-native";
 
-export const Profile = () => {
-  const navigation = useNavigation();
+export const Profile = ({navigation}) => {
+  // const navigation = useNavigation();
+  const [fname, setFname] = useState(null);
+  const [lname, setLname] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [email, setEmail] = useState(null);
+
+  const uid = firebase.auth().currentUser.uid;
+
+firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
+  (querySnapshot) => {
+    if (!querySnapshot.empty) {
+      const fnames = [];
+      const locations = []; 
+      const phones = [];
+      const emails = [];
+
+      querySnapshot.forEach((doc) => {
+        const fname = doc.data().Fname;
+        const location = doc.data().Location;
+        const phone = doc.data().Phone;
+        const email = doc.data().Email;
+
+        fnames.push(fname); 
+        locations.push(location);
+        phones.push(phone);
+        emails.push(email);
+      });
+ 
+      const singleFname = fnames[0];
+      const singleLocation = locations[0];
+      const singlePhones = phones[0];
+      const singleEmails = emails[0];
+
+      setFname(singleFname);
+      setLocation(singleLocation);
+      setPhone(singlePhones);
+      setEmail(singleEmails);
+    } else {
+      console.log('No documents matching the condition found.');
+    }
+  });
+
 
   function handleEditPress() {
     navigation.navigate('EditProfile');
@@ -28,7 +73,7 @@ export const Profile = () => {
             <Title style={[styles.title, {
               marginTop:10,
               marginBottom: 5,
-            }]}>John Doe</Title>
+            }]}>{fname}</Title>
             <Caption style={styles.caption}>@j_doe</Caption>
           </View>
         </View>
@@ -37,16 +82,16 @@ export const Profile = () => {
 
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
-          <Icon name="map-marker-radius" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>CAPT, NUS</Text>
+        <IconFill name="account-book" />
+          <Text style={{color:"#777777", marginLeft: 20}}>{location}</Text>
         </View>
         <View style={styles.row}>
-          <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>98239404</Text>
+          {/* <Icon name="phone" color="#777777" size={20}/> */}
+          <Text style={{color:"#777777", marginLeft: 20}}>{phone}</Text>
         </View>
         <View style={styles.row}>
-          <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+          {/* <Icon name="email" color="#777777" size={20}/> */}
+          <Text style={{color:"#777777", marginLeft: 20}}>{email}</Text>
         </View>
       </View>
       <View style={styles.infoBoxWrapper}>
@@ -66,20 +111,20 @@ export const Profile = () => {
       <View style={styles.menuWrapper}>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-            <Icon name="account-check-outline" color="#FF6347" size={25}/>
+            {/* <Icon name="account-check-outline" color="#FF6347" size={25}/> */}
             <Text style={styles.menuItemText}>Support</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-            <Icon name="settings-outline" color="#FF6347" size={25}/>
+            {/* <Icon name="settings-outline" color="#FF6347" size={25}/> */}
             <Text style={styles.menuItemText}>Settings</Text>
           </View>
         </TouchableRipple>
 
         <TouchableRipple onPress={handleEditPress}>
           <View style={styles.menuItem}>
-            <Icon name="account-check-outline" color="#FF6347" size={25}/>
+            {/* <Icon name="account-check-outline" color="#FF6347" size={25}/> */}
             <Text style={styles.menuItemText}>Edit Profile</Text>
           </View>
         </TouchableRipple>

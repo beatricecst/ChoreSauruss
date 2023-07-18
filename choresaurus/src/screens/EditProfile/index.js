@@ -18,11 +18,13 @@ import { useState, useContext } from 'react';
 import 'firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
-const EditProfile = () => {
+const EditProfile = ({navigation}) => {
   const {user, logout} = useContext(AuthContext);
   const [fname, setFname] = useState(null);
   const [lname, setLname] = useState(null);
+  const [location, setLocation] = useState(null);
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
 
@@ -32,20 +34,29 @@ const EditProfile = () => {
   const handleLname = (l) => {
       setLname(l);
   }
+  const handleLocation = (l) => {
+    setLocation(l);
+  }
   const handlePhone = (p) => {
       setPhone(p);
   }
   const handleEmail = (e) => {
     setEmail(e);
 }
-
+// const navigation = useNavigation();
+const goBack = () => {
+  navigation.navigate('Profile');
+}
 const Edit = async() => {
+  navigation.navigate('Profile', 
+      {name: fname, number: phone, location: location, email: email});
         
   firestore().collection('users')
               .add({
                   userid: user.uid,
                   Fname: fname,
                   Lname: lname,
+                  Location: location,
                   Phone: phone,
                   Email: email
               })
@@ -125,6 +136,15 @@ const Edit = async() => {
           />
         </View>
         <View style={styles.action}>
+          <FontAwesome name="user-o" size={20} />
+          <TextInput
+            onChangeText={handleLocation}
+            placeholder="Default Location"
+            placeholderTextColor="#666666"
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.action}>
           <Feather name="phone" size={20} />
           <TextInput
             onChangeText={handlePhone}
@@ -147,7 +167,11 @@ const Edit = async() => {
         <TouchableOpacity style={styles.commandButton} onPress={Edit}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.commandButton} onPress={goBack}>
+          <Text style={styles.panelButtonTitle}>Back to profile</Text>
+        </TouchableOpacity>
       </View>
+      
     </View>
   );
 };
