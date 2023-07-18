@@ -15,14 +15,15 @@ export default AddButt;
 const styles = StyleSheet.create({
     butt: {
         backgroundColor: '#FFFFFF',
-        width: 150,
-        height: 30,
-        borderRadius: 10,
+        width: 200,
+        height: 50,
+        borderRadius: 15,
         marginTop: 60,
         marginBottom: 20,
         flexDirection:'row',
         alignItems: 'center',
         marginTop: 30,
+        justifyContent: "center",
 
     },
     buttText: {

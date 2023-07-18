@@ -24,16 +24,13 @@ export const Feed = () => {
     
 
     return (
-        <View>
-            <View style={styles.container}>
-                <Text>This is where we display ongoing task</Text>
-                <Text>the two buttons below are working</Text>
-            </View>
-            <View style={styles.container1}>
+        <View style={styles.bigContainer}>
+            
+            <View>
                 <AddButt title='New Job Request' onPress={goAddJob}/>
              </View>
 
-            <View style={styles.container2}>
+            <View>
                 <JobListButt title='Job Listing' onPress={goJobList}/>
             </View>
             
@@ -48,6 +45,13 @@ export const Feed = () => {
 }
 
 const styles = StyleSheet.create({
+    bigContainer: {
+        alignItems: "center",
+        flexDirection: 'column',
+        flex: 1,
+        justifyContent: 'center',
+    }, 
+
     container: {
         width: '80%',
         height: 400,
