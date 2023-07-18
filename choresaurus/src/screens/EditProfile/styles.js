@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FF6347',
         alignItems: 'center',
         marginTop: 10,
+        marginBottom: 20,
       },
+      
       panel: {
         padding: 20,
         backgroundColor: '#FFFFFF',
@@ -63,6 +65,11 @@ export const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
         color: 'white',
+      },
+      back: {
+        fontSize: 17,
+        color: '#FF6347',
+        alignSelf: 'center'
       },
       action: {
         flexDirection: 'row',

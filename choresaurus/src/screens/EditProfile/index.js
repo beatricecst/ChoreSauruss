@@ -167,8 +167,8 @@ const Edit = async() => {
         <TouchableOpacity style={styles.commandButton} onPress={Edit}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.commandButton} onPress={goBack}>
-          <Text style={styles.panelButtonTitle}>Back to profile</Text>
+        <TouchableOpacity onPress={goBack}>
+          <Text style={styles.back}>Back to profile</Text>
         </TouchableOpacity>
       </View>
       

@@ -74,7 +74,6 @@ firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
               marginTop:10,
               marginBottom: 5,
             }]}>{fname}</Title>
-            <Caption style={styles.caption}>@j_doe</Caption>
           </View>
         </View>
       </View>
