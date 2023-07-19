@@ -110,8 +110,9 @@ export default function Messages({onBack, myData, selectedUser}) {
   return (
     <>
       <Pressable onPress={onBack} style={styles.actionBar}>
-        <Image source={require('../assets/chats.png')} />
-        <Text>{selectedUser?.name}</Text>
+        <Image source={require('../assets/arrow.png')} style={styles.arrow}/>
+        <Text>Back</Text>
+        <Text>{selectedUser?.id}</Text>
       </Pressable>
       <GiftedChat
         messages={messages}
@@ -132,4 +133,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  arrow: {
+    height: 20,
+    width: 30,
+    marginLeft: 20,
+    marginRight: 10,
+  }
 });

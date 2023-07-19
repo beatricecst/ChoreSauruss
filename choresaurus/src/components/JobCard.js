@@ -13,7 +13,7 @@ const JobCard = ({item, onPress}) => {
             <Text style={styles.text}>Start: {item.start}</Text>
             <Text style={styles.text}>End: {item.end}</Text>
             <Text style={styles.text}>Job Description: {item.desc}</Text>
-            <TouchableOpacity onPress={() => onPress(item.userName)} style={styles.butt}>
+            <TouchableOpacity onPress={() => onPress(item.userid)} style={styles.butt}>
                 <Text style={styles.buttText}>Accept job</Text>
             </TouchableOpacity>
         </View>

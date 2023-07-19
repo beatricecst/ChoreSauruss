@@ -82,20 +82,20 @@ export default function Chats() {
       const user = await findUser(id);
 
       if (user) {
-        // if (user.userid === myData.userid) {
-        //   // don't let user add himself
-        //   return;
-        // }
+        if (user.userid === myData.userid) {
+           // don't let user add himself
+           return;
+         }
 
-        // if (
-        //   myData.friends &&
-        //   myData.friends.findIndex(f => f.userid === user.userid) > 0
-        // ) {
-        //   // don't let user add a user twice
-        //   return;
-        // }
+         if (
+           myData.friends &&
+           myData.friends.findIndex(f => f.userid === user.userid) > 0
+         ) {
+           // don't let user add a user twice
+           return;
+         }
 
-        // create a chatroom and store the chatroom id
+         
 
         const newChatroomRef = push(ref(database, 'chatrooms'), {
           firstUser: myData.userid,
