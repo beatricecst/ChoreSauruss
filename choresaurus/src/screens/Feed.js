@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, Text, View } from "react-native";
 import AddButt from "../components/AddButt";
 import JobListButt from "../components/JobListButt";
@@ -9,6 +9,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FlatList } from "react-native";
 import { AddJob } from "./AddJob";
+import FormButton from "../components/FormButton";
+import { AuthContext } from "../components/AuthProvider";
 
 export const Feed = () => {
 
@@ -21,7 +23,7 @@ export const Feed = () => {
     function goJobList() {
         navigation.navigate('Browse');
     }
-    
+    const {logout} = useContext(AuthContext);
 
     return (
         <View style={styles.bigContainer}>
@@ -33,10 +35,10 @@ export const Feed = () => {
             <View>
                 <JobListButt title='Job Listing' onPress={goJobList}/>
             </View>
-            
-        
-            
 
+            <View>
+                <FormButton buttonTitle='Log out' onPress={() => logout()} />
+            </View>
 
         </View>
         

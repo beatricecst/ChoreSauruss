@@ -18,28 +18,28 @@ export const Browse = () => {
     
     const [jobs, setJobs] = useState(null);
 
-    firebase.firestore().collection('users').where('Email', '==', 'jane@gmail.com').get()
-  .then((querySnapshot) => {
-    if (!querySnapshot.empty) {
-      const fnames = []; // In case there are multiple matching documents, store them in an array
+//     firebase.firestore().collection('users').where('userid', '==', uid).get()
+//   .then((querySnapshot) => {
+//     if (!querySnapshot.empty) {
+//       const fnames = []; // In case there are multiple matching documents, store them in an array
 
-      querySnapshot.forEach((doc) => {
-        const fname = doc.data().Fname;
-        fnames.push(fname); // Store the 'Fname' value in the array
-      });
+//       querySnapshot.forEach((doc) => {
+//         const fname = doc.data().Fname;
+//         fnames.push(fname); // Store the 'Fname' value in the array
+//       });
 
-      // If there's only one document, you can directly access the 'Fname' value
-      const singleFname = fnames[0];
+//       // If there's only one document, you can directly access the 'Fname' value
+//       const singleFname = fnames[0];
 
-      console.log('Fnames:', fnames);
-      console.log('Single Fname:', singleFname);
-    } else {
-      console.log('No documents matching the condition found.');
-    }
-  })
-  .catch((error) => {
-    console.log('Error getting documents:', error);
-  });
+//       console.log('Fnames:', fnames);
+//       console.log('Single Fname:', singleFname);
+//     } else {
+//       console.log('No documents matching the condition found.');
+//     }
+//   })
+//   .catch((error) => {
+//     console.log('Error getting documents:', error);
+//   });
 
 
     // useEffect(() => {

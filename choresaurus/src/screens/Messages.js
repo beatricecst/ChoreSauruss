@@ -48,26 +48,26 @@ export default function Messages({onBack, myData, selectedUser}) {
             _id: index,
             user: {
               _id:
-                msg.sender === myData.username
-                  ? myData.username
-                  : selectedUser.username,
+                msg.sender === myData.userid
+                  ? myData.userid
+                  : selectedUser.userid,
               avatar:
-                msg.sender === myData.username
+                msg.sender === myData.userid
                   ? myData.avatar
                   : selectedUser.avatar,
               name:
-                msg.sender === myData.username
-                  ? myData.username
-                  : selectedUser.username,
+                msg.sender === myData.userid
+                  ? myData.userid
+                  : selectedUser.userid,
             },
           }))
         : [];
     },
     [
       myData.avatar,
-      myData.username,
+      myData.userid,
       selectedUser.avatar,
-      selectedUser.username,
+      selectedUser.userid,
     ],
   );
 
@@ -96,7 +96,7 @@ export default function Messages({onBack, myData, selectedUser}) {
           ...lastMessages,
           {
             text: msg[0].text,
-            sender: myData.username,
+            sender: myData.userid,
             createdAt: new Date(),
           },
         ],
@@ -104,7 +104,7 @@ export default function Messages({onBack, myData, selectedUser}) {
 
       setMessages(prevMessages => GiftedChat.append(prevMessages, msg));
     },
-    [fetchMessages, myData.username, selectedUser.chatroomId],
+    [fetchMessages, myData.userid, selectedUser.chatroomId],
   );
 
   return (
@@ -117,7 +117,7 @@ export default function Messages({onBack, myData, selectedUser}) {
         messages={messages}
         onSend={newMessage => onSend(newMessage)}
         user={{
-          _id: myData.username,
+          _id: myData.userid,
         }}
       />
     </>
