@@ -6,12 +6,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const ParaInput = ({label, placeholder, onChangeText}) => {
     return (
         <SafeAreaView>
-            <View style={styles.container}>
-                <Text style={styles.text}>{label}</Text>
-                <TextInput placeholder={placeholder} style={styles.textInput} multiline numberOfLines={2} onChangeText={onChangeText}>
-
-                </TextInput>
-            </View>
+            <View>
+      {/* Bold label */}
+      <Text style={styles.label}>{label}</Text>
+      {/* Outlined text input box */}
+      <TextInput
+        style={styles.inputBox}
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+      />
+    </View>
         </SafeAreaView>
     )
 }

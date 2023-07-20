@@ -40,15 +40,19 @@ firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
         emails.push(email);
       });
  
-      const singleFname = fnames[0];
-      const singleLocation = locations[0];
-      const singlePhones = phones[0];
-      const singleEmails = emails[0];
-
-      setFname(singleFname);
-      setLocation(singleLocation);
-      setPhone(singlePhones);
-      setEmail(singleEmails);
+      if (querySnapshot.docs.length > 0) {
+        const lastIndex = querySnapshot.docs.length - 1;
+        const singleFname = fnames[lastIndex];
+        const singleLocation = locations[lastIndex];
+        const singlePhones = phones[lastIndex];
+        const singleEmails = emails[lastIndex];
+        setFname(singleFname);
+        setLocation(singleLocation);
+        setPhone(singlePhones);
+        setEmail(singleEmails);
+      }
+      
+      
     } else {
       console.log('No documents matching the condition found.');
     }

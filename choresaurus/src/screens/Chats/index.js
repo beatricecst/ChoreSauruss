@@ -13,11 +13,9 @@ import {
   update,
 } from 'firebase/database';
 
-import { firebase } from '@react-native-firebase/auth';
-
-export default function Chats() {
+export default function ChatApp() {
   const [currentPage, setCurrentPage] = useState('login');
-  const [userid, setUserid] = useState(null);
+  const [username, setUsername] = useState(null);
   const [users, setUsers] = useState([]);
   const [userToAdd, setUserToAdd] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -27,26 +25,24 @@ export default function Chats() {
     try {
       const database = getDatabase();
       //first check if the user registered before
-      const id = firebase.auth().currentUser.uid;
-      const user = await findUser(firebase.auth().currentUser.uid);
-      setUserid(id);
-      console.log('uid: ', id);
+
+      const user = await findUser(username);
 
       //create a new user if not registered
       if (user) {
         setMyData(user);
       } else {
         const newUserObj = {
-          userid: userid,
+          username: username,
           avatar: 'https://i.pravatar.cc/150?u=' + Date.now(),
         };
 
-        set(ref(database, `users/${userid}`), newUserObj);
+        set(ref(database, `users/${username}`), newUserObj);
         setMyData(newUserObj);
       }
 
       // set friends list change listener
-      const myUserRef = ref(database, `users/${userid}`);
+      const myUserRef = ref(database, `users/${username}`);
       onValue(myUserRef, snapshot => {
         const data = snapshot.val();
         setUsers(data.friends);
@@ -61,10 +57,10 @@ export default function Chats() {
     }
   };
 
-  const findUser = async id => {
+  const findUser = async name => {
     const database = getDatabase();
 
-    const mySnapshot = await get(ref(database, `users/${id}`));
+    const mySnapshot = await get(ref(database, `users/${name}`));
 
     return mySnapshot.val();
   };
@@ -74,32 +70,32 @@ export default function Chats() {
     setSelectedUser(user);
   };
 
-  const onAddFriend = async id => {
+  const onAddFriend = async name => {
     try {
       //find user and add it to my friends and also add me to his friends
       const database = getDatabase();
 
-      const user = await findUser(id);
+      const user = await findUser(name);
 
       if (user) {
-        if (user.userid === myData.userid) {
-           // don't let user add himself
-           return;
-         }
+        if (user.username === myData.username) {
+          // don't let user add himself
+          return;
+        }
 
-         if (
-           myData.friends &&
-           myData.friends.findIndex(f => f.userid === user.userid) > 0
-         ) {
-           // don't let user add a user twice
-           return;
-         }
+        if (
+          myData.friends &&
+          myData.friends.findIndex(f => f.username === user.username) > 0
+        ) {
+          // don't let user add a user twice
+          return;
+        }
 
-         
+        // create a chatroom and store the chatroom id
 
         const newChatroomRef = push(ref(database, 'chatrooms'), {
-          firstUser: myData.userid,
-          secondUser: user.userid,
+          firstUser: myData.username,
+          secondUser: user.username,
           messages: [],
         });
 
@@ -107,11 +103,11 @@ export default function Chats() {
 
         const userFriends = user.friends || [];
         //join myself to this user friend list
-        update(ref(database, `users/${user.userid}`), {
+        update(ref(database, `users/${user.username}`), {
           friends: [
             ...userFriends,
             {
-              username: myData.userid,
+              username: myData.username,
               avatar: myData.avatar,
               chatroomId: newChatroomId,
             },
@@ -120,11 +116,11 @@ export default function Chats() {
 
         const myFriends = myData.friends || [];
         //add this user to my friend list
-        update(ref(database, `users/${myData.userid}`), {
+        update(ref(database, `users/${myData.username}`), {
           friends: [
             ...myFriends,
             {
-              userid: user.userid,
+              username: user.username,
               avatar: user.avatar,
               chatroomId: newChatroomId,
             },
@@ -143,8 +139,10 @@ export default function Chats() {
   switch (currentPage) {
     case 'login':
       return (
-        <Enter
+        <Login
           onLogin={onLogin}
+          username={username}
+          setUsername={setUsername}
         />
       );
     case 'users':
@@ -159,7 +157,7 @@ export default function Chats() {
       );
     case 'chat':
       return (
-        <Messages myData={myData} selectedUser={selectedUser} onBack={onBack} />
+        <Chat myData={myData} selectedUser={selectedUser} onBack={onBack} />
       );
     default:
       return null;
