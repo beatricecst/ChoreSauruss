@@ -21,7 +21,7 @@ export default function Users({
     return (
       <Pressable onPress={() => onClickUser(item)} style={styles.row}>
         <Image style={styles.avatar} source={{uri: item.avatar}} />
-        <Text>{item.userid}</Text>
+        <Text>{item.username}</Text>
       </Pressable>
     );
   };
@@ -38,7 +38,7 @@ export default function Users({
       <FlatList
         data={users}
         renderItem={renderUser}
-        keyExtractor={item => item.userid.toString()}
+        keyExtractor={item => item.username.toString()}
         
       />
     </>

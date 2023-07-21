@@ -2,7 +2,7 @@ import { firebase } from '@react-native-firebase/auth';
 import React from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
-export default function Enter({onLogin, userid, setUserid}) {
+export default function Enter({onLogin, username, setUsername}) {
     // const currentUid = firebase.auth().currentUser.uid;
     // setUsername(currentUid);
     // console.log(currentUid);
@@ -11,9 +11,9 @@ export default function Enter({onLogin, userid, setUserid}) {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        onChangeText={setUserid}
-        value={userid}
-        placeholder='Enter your uid'
+        onChangeText={setUsername}
+        value={username}
+        placeholder='Enter your name'
       />
       <Button title={'Enter Chatroom'} onPress={onLogin} />
     </View>

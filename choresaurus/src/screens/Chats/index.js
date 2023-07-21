@@ -13,7 +13,7 @@ import {
   update,
 } from 'firebase/database';
 
-export default function ChatApp() {
+export default function Chats() {
   const [currentPage, setCurrentPage] = useState('login');
   const [username, setUsername] = useState(null);
   const [users, setUsers] = useState([]);
@@ -139,7 +139,7 @@ export default function ChatApp() {
   switch (currentPage) {
     case 'login':
       return (
-        <Login
+        <Enter
           onLogin={onLogin}
           username={username}
           setUsername={setUsername}
@@ -157,7 +157,7 @@ export default function ChatApp() {
       );
     case 'chat':
       return (
-        <Chat myData={myData} selectedUser={selectedUser} onBack={onBack} />
+        <Messages myData={myData} selectedUser={selectedUser} onBack={onBack} />
       );
     default:
       return null;

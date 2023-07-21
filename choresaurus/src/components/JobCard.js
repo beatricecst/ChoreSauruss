@@ -4,6 +4,7 @@ import { StyleSheet, Dimensions } from "react-native";
 import { useState, useEffect } from "react";
 import firestore from '@react-native-firebase/firestore';
 import { TouchableOpacity } from "react-native";
+import { Alert } from "react-native";
 
 const JobCard = ({item, onPress}) => {
 
@@ -13,7 +14,9 @@ const JobCard = ({item, onPress}) => {
             <Text style={styles.text}>Start: {item.start}</Text>
             <Text style={styles.text}>End: {item.end}</Text>
             <Text style={styles.text}>Job Description: {item.desc}</Text>
-            <TouchableOpacity onPress={() => onPress(item.userid)} style={styles.butt}>
+            <TouchableOpacity onPress={() => {
+                        Alert.alert(`Talk to ${item.userName} now!`, `Add ${item.userName} under the messages tab`)
+                    }} style={styles.butt}>
                 <Text style={styles.buttText}>Accept job</Text>
             </TouchableOpacity>
         </View>
