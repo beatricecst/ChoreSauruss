@@ -54,7 +54,8 @@ export const AddJob = () => {
                 <Headers title='New Job Request' />
                 <ParaInput label='Start Location' placeholder='eg. Kent Ridge Mrt' onChangeText={handleStart}/>
                 <ParaInput label='End Location' placeholder='eg. Central Library' onChangeText={handleEnd}/>
-                <ParaInput label='Job Description' placeholder='eg. Please help to buy a packet of Panadol from Watsons and pass it to me at Central Library.' onChangeText={handleDesc}/>
+                <ParaInput label='Job Description' placeholder='eg. Please help to buy a packet of Panadol from 
+            Watsons and pass it to me at Central Library.' onChangeText={handleDesc}/>
                 <BlueButton title='Submit' onPress={submitJob}/>
             </View>
         </SafeAreaView>
