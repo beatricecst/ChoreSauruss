@@ -7,8 +7,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import EditProfile from "../EditProfile";
 import { firebase } from "@react-native-firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IconFill, IconOutline } from "@ant-design/icons-react-native";
+import { AuthContext } from "../../components/AuthProvider";
+
+
 
 export const Profile = ({navigation}) => {
   // const navigation = useNavigation();
@@ -63,6 +66,8 @@ firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
     navigation.navigate('EditProfile');
   }
 
+
+  const {logout} = useContext(AuthContext);
     return (
         <SafeAreaView style={styles.container}>
             <View style={[styles.userInfoSection,{ justifyContent: 'flex-start' }] }>
@@ -115,12 +120,8 @@ firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
       </View>
 
       <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            {/* <Icon name="account-check-outline" color="#FF6347" size={25}/> */}
-            <Text style={styles.menuItemText}>Support</Text>
-          </View>
-        </TouchableRipple>
+    
+
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             {/* <Icon name="settings-outline" color="#FF6347" size={25}/> */}
@@ -132,6 +133,12 @@ firebase.firestore().collection('users').where('userid', '==', uid).onSnapshot(
           <View style={styles.menuItem}>
             {/* <Icon name="account-check-outline" color="#FF6347" size={25}/> */}
             <Text style={styles.menuItemText}>Edit Profile</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => logout()}>
+          <View style={styles.menuItem}>
+            {/* <Icon name="account-check-outline" color="#FF6347" size={25}/> */}
+            <Text style={styles.menuItemText}>Logout</Text>
           </View>
         </TouchableRipple>
 

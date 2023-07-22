@@ -15,6 +15,7 @@ import { ProfileNavigator } from '../screens/ProfileNavigator';
 import { AddJob } from '../screens/AddJob';
 import { Browse } from '../screens/Browse';
 import EditProfile from '../screens/EditProfile';
+import { Map } from '../screens/Map';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -68,6 +69,19 @@ const MessageStack = ({navigation}) => (
     </Stack.Navigator>
   );
 
+  const MapStack = ({navigation}) => (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={({route}) => ({
+        //   title: route.params.userName,
+          headerShown: false,
+        })}
+      />
+    </Stack.Navigator>
+  );
+
 const AppStack = () => {
   const getTabBarVisibility = (route) => {
     const routeName = route.state
@@ -79,6 +93,9 @@ const AppStack = () => {
     }
     return true;
   };
+
+
+  
 
   return (
     
@@ -102,6 +119,22 @@ const AppStack = () => {
             
         })}
       />
+
+
+<Tab.Screen
+        name="Map"
+        component={MapStack}
+        options={({route}) => ({
+          // tabBarVisible: route.state && route.state.index === 0,
+          tabBarIcon: ({focused, color, size}) => {
+            let iconSource = focused
+                ? require('../assets/dno.png')
+                : require('../assets/dno.png');
+            return <Image source={iconSource} style={styles.tabIcon} />;
+          }
+            
+        })}
+      />
       <Tab.Screen
         name="Messages"
         component={MessageStack}
@@ -120,7 +153,7 @@ const AppStack = () => {
         })}
       />
       <Tab.Screen
-        name="ProfileStack"
+        name="Profile"
         component={ProfileStack}
         options={{
           // tabBarLabel: 'Home',
@@ -132,7 +165,10 @@ const AppStack = () => {
           }
         }}
       />
+
+
     </Tab.Navigator>
+    
   );
 };
 

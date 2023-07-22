@@ -2,6 +2,7 @@ import { firebase } from '@react-native-firebase/auth';
 import React from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
+
 export default function Enter({onLogin, username, setUsername}) {
     // const currentUid = firebase.auth().currentUser.uid;
     // setUsername(currentUid);

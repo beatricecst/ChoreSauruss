@@ -179,7 +179,7 @@ export const Browse = () => {
                     // <Text>Start: {item.start} </Text>
                     // <Text>End: {item.end}</Text>
                     // <Text>Job Description: {item.desc}</Text>
-                    // </View>
+                    // </View >
                     <JobCard 
                         item={item}
                         

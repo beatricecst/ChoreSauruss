@@ -2,11 +2,11 @@ import React from "react";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 
+
 const AddButt = ({title, onPress}) => {
     return (
         <Pressable onPress={onPress} style={styles.butt}>
-            <Text style={styles.buttText}>{title}</Text>
-            <Image style={styles.image} source={require('../assets/plus.png')} />
+            <Image source={require('../assets/croppedino.gif')} style={styles.profileImg} />
         </Pressable>
     )
 }
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     butt: {
         backgroundColor: '#FFFFFF',
         width: 200,
-        height: 50,
+        height: 200,
         borderRadius: 15,
         marginTop: 60,
         marginBottom: 20,
@@ -30,9 +30,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#000000',
         fontFamily: 'Al Nile',
-        textAlign: 'center',
+        textAlign: 'justify',
         marginLeft: 10,
     },
+    profileImg: {
+        height: 150,
+        width: 150,
+        borderRadius: 0,
+      },
     image: {
         width:24,
         height: 24,

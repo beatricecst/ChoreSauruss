@@ -12,7 +12,7 @@ export function ProfileNavigator() {
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name= 'Profile' component= {Profile}/>
             <Stack.Screen name='EditProfile' component={EditProfile} />
-            
+    
         </Stack.Navigator>
     );
     

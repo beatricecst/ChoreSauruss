@@ -36,9 +36,6 @@ export const Feed = () => {
                 <JobListButt title='Job Listing' onPress={goJobList}/>
             </View>
 
-            <View>
-                <FormButton buttonTitle='Log out' onPress={() => logout()} />
-            </View>
 
         </View>
         
@@ -52,6 +49,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: "#ccd4ac"
     }, 
 
     container: {
