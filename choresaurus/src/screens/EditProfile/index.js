@@ -83,9 +83,7 @@ const Edit = async() => {
               }}
             >
               <ImageBackground
-                source={{
-                  uri: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.veryicon.com%2Ficons%2Fobject%2Fmaterial-design-icons%2Fface-2.html&psig=AOvVaw3p4MlmZdeV2kl0Ok5hznLJ&ust=1687319292818000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMjf8ar40P8CFQAAAAAdAAAAABAE',
-                }}
+                source={require("../../assets/greeny.png") }
                 style={{ height: 100, width: 100 }}
                 imageStyle={{ borderRadius: 15 }}
               >
@@ -96,19 +94,6 @@ const Edit = async() => {
                     alignItems: 'center',
                   }}
                 >
-                  <Icon
-                    name="camera"
-                    size={35}
-                    color="#fff"
-                    style={{
-                      opacity: 0.7,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                      borderRadius: 10,
-                    }}
-                  />
                 </View>
               </ImageBackground>
             </View>
@@ -118,7 +103,7 @@ const Edit = async() => {
           </Text>
         </View>
         <View style={styles.action}>
-          <FontAwesome name="user-o" size={20} />
+        
           <TextInput
             onChangeText={handleFname}
             placeholder="First Name"
@@ -127,7 +112,7 @@ const Edit = async() => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="user-o" size={20} />
+          
           <TextInput
             onChangeText={handleLname}
             placeholder="Last Name"
@@ -136,7 +121,7 @@ const Edit = async() => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="user-o" size={20} />
+         
           <TextInput
             onChangeText={handleLocation}
             placeholder="Default Location"
@@ -145,7 +130,7 @@ const Edit = async() => {
           />
         </View>
         <View style={styles.action}>
-          <Feather name="phone" size={20} />
+          
           <TextInput
             onChangeText={handlePhone}
             placeholder="Phone"
@@ -155,7 +140,7 @@ const Edit = async() => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="envelope-o" size={20} />
+         
           <TextInput
             onChangeText={handleEmail}
             placeholder="Email"
