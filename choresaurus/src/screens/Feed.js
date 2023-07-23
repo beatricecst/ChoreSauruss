@@ -34,6 +34,10 @@ export const Feed = () => {
 
             <View>
                 <JobListButt title='Job Listing' onPress={goJobList}/>
+                <FormButton
+                    buttonTitle="Log out"
+                    onPress={() => logout()}
+                />
             </View>
 
 

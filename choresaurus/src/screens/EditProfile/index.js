@@ -114,7 +114,7 @@ const Edit = async() => {
             </View>
           </TouchableOpacity>
           <Text style={{ marginTop: 10, fontSize: 18, fontWeight: 'bold' }}>
-            Joe mama
+            Edit your profile
           </Text>
         </View>
         <View style={styles.action}>

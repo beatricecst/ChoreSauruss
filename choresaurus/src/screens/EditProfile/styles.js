@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
       commandButton: {
         padding: 15,
         borderRadius: 10,
-        backgroundColor: '#FF6347',
+        backgroundColor: '#2e64e5',
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 20,
@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
       panelButton: {
         padding: 13,
         borderRadius: 10,
-        backgroundColor: '#FF6347',
+        backgroundColor: '#2e64e5',
         alignItems: 'center',
         marginVertical: 7,
       },
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
       },
       back: {
         fontSize: 17,
-        color: '#FF6347',
+        color: '#2e64e5',
         alignSelf: 'center'
       },
       action: {

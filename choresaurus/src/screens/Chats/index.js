@@ -12,6 +12,7 @@ import {
   push,
   update,
 } from 'firebase/database';
+import { Alert } from 'react-native';
 
 export default function Chats() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -126,6 +127,8 @@ export default function Chats() {
             },
           ],
         });
+      } else {
+        Alert.alert('User does not exist!', 'Double check the username')
       }
     } catch (error) {
       console.error(error);
