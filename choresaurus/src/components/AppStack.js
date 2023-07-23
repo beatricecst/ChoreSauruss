@@ -105,7 +105,7 @@ const AppStack = () => {
       // }}
       >
       <Tab.Screen
-        name="FeedStack"
+        name="Home"
         component={FeedStack}
         options={({route}) => ({
           tabBarLabel: 'Home',
